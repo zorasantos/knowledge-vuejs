@@ -9,6 +9,7 @@ module.exports = app => {
         return bcrypt.hashSync(password, salt)
     }
 
+    //Funciona pra salvar e alterar
     const save = async (req, res) => {
         const user = { ...req.body }
         if(req.params.id) user.id = req.params.id
