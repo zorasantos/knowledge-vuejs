@@ -1,8 +1,9 @@
 <template>
-  <div class="page-title">
-    <h1><v-icon v-if="icon" :class="icon"></v-icon>{{ main }}</h1>
-    <h2>{{ sub }}</h2>    
-  </div>
+  <v-card color="transparent" flat class="page-title">
+    <v-card-title class="font-weight-black display-1"><v-icon v-if="icon" :class="icon"></v-icon>{{ main }}</v-card-title>
+    <v-card-subtitle class="font-weight-bold">{{ sub }}</v-card-subtitle>    
+    <hr />
+  </v-card>
 </template>
 
 <script>
@@ -13,12 +14,4 @@ export default {
 </script>
 
 <style>
-  .page-title h1 {
-      margin: 0px;
-  }
-  .page-title h2 {
-      color: #777;
-      margin-top: 5px;
-      font-size: 1.3rem;
-  }
 </style>

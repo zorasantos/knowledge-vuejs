@@ -38,7 +38,12 @@ export default {
         { title: 'Administração' },
         { title: 'Sair' }
       ]
-    }) 
+    }),
+    methods: {
+      menu() {
+        
+      }
+    } 
 }
 </script>
 
