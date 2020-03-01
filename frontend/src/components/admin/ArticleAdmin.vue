@@ -144,6 +144,7 @@ export default {
       loadArticle(article, mode = 'save') {
         this.mode = mode
         // this.article = { ...article }
+
         axios.get(`${baseApiUrl}/articles/${article.id}`)
           .then(res => this.article = res.data)
           console.log(this.article)

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="menu">
+  <v-container class="menu" v-if="isMenuVisible">
     <v-navigation-drawer
       v-model="sideNav"
       temporary
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data: () => ({
       sideNav: false,
@@ -58,6 +59,7 @@ export default {
         }
       ]
   }),
+  computed: mapState(['isMenuVisible'])
 }
 </script>
 

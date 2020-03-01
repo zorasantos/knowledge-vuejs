@@ -92,71 +92,66 @@
 import { baseApiUrl } from '@/global'
 import axios from 'axios'
 export default {
-    name: 'UserAdmin',
-    data: () => {
-        return {
-            name: null,
-            email: null,
-            password: null,
-            confirmPassword: null,
-            admin: null,
-            headers: [
-              { text: 'Codigo', value: 'id' },
-              { text: 'Nome', value: 'name' },
-              { text: 'E-mail', value: 'email' },
-              { text: 'Administrador', value: 'admin', formatter: value => value ? 'Sim' : 'Não' },
-              { text: 'Actions', value: 'action', sortable: false }
-            ],
-            rules: {
-              required: value => !!value || 'Campo Obrigatorio!',
-              email: value => {
-                const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                return pattern.test(value) || 'E-mail invalido'
-              }
-            },
-            mode: 'save',
-            user: {},
-            users: []
+  name: 'UserAdmin',
+  data: () => {
+    return {
+      mode: 'save',
+      user: {},
+      users: [],
+      headers: [
+        { text: 'Codigo', value: 'id' },
+        { text: 'Nome', value: 'name' },
+        { text: 'E-mail', value: 'email' },
+        { text: 'Administrador', value: 'admin', formatter: value => value ? 'Sim' : 'Não' },
+        { text: 'Actions', value: 'action', sortable: false }
+      ],
+      rules: {
+        required: value => !!value || 'Campo Obrigatorio!',
+        email: value => {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          return pattern.test(value) || 'E-mail invalido'
         }
-    },
-    methods: {
-      loadUsers() {
-        const url = `${baseApiUrl}/users`
-        axios.get(url).then(res => {
-          this.users = res.data
-        })
       },
-      reset() {
-          this.mode = 'save'
-          this.user = {}
-          this.loadUsers()
-      },
-      save() {
-        const method = this.user.id ? 'put' : 'post'
-        const id = this.user.id ? `/${this.user.id}` : ''
-        axios[method](`${baseApiUrl}/users${id}`, this.user)
-          .then(() => {
-            this.reset()
-          })
-      },
-      remove() {
-        const id = this.user.id
-        axios.delete(`${baseApiUrl}/users/${id}`)
-          .then(() => {
-            this.reset()
-            console.log('Apagou usuario!')
-          })
-      },
-      loadUser(user, mode = 'save') {
-          this.mode = mode
-          this.user = { ...user }
-      }
-
-    },
-    mounted() {
-        this.loadUsers()
     }
-    
+  },
+  methods: {
+    loadUsers() {
+      const url = `${baseApiUrl}/users`
+      axios.get(url).then(res => {
+        this.users = res.data
+      })
+    },
+    reset() {
+        this.mode = 'save'
+        this.user = {}
+        this.loadUsers()
+    },
+    save(event) {
+      const method = this.user.id ? 'put' : 'post'
+      const id = this.user.id ? `/${this.user.id}` : ''
+      axios[method](`${baseApiUrl}/users${id}`, this.user)
+        .then(() => {
+          event.preventDefault()
+          this.reset()
+        })
+    },
+    remove() {
+      const id = this.user.id
+      axios.delete(`${baseApiUrl}/users/${id}`)
+        .then(() => {
+          this.reset()
+          console.log('Apagou usuario!')
+        })
+    },
+    loadUser(user, mode = 'save') {
+      this.mode = mode
+      this.user = { ...user }
+    }
+
+  },
+  mounted() {
+    this.loadUsers()
+  } 
 }
 </script>
 
