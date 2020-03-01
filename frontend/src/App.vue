@@ -1,6 +1,6 @@
 <template>
-  <v-app id="app">
-    <Header :hideUserDropDown="false" title="COD3R - Base de Conhecimento" />
+  <v-app id="app" :class="{'hide-menu': !user}">
+    <Header :hideUserDropDown="!user" title="COD3R - Base de Conhecimento" />
     <v-content class="content">
       <router-view></router-view>
     </v-content>
@@ -11,6 +11,7 @@
 <script>
 import Header from './components/templates/Header'
 import Footer from './components/templates/Footer'
+import { mapState } from 'vuex'
 export default {
   name: 'App',
 
@@ -18,6 +19,7 @@ export default {
     Header,
     Footer
   },
+  computed: mapState(['isMenuVisible', 'user']),
   data: () => ({
     //
   }),
