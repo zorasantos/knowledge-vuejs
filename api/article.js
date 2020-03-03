@@ -68,7 +68,7 @@ module.exports = app => {
             .first()
             .then(article => {
                 article.content = article.content.toString()
-                return res.json(articles)
+                return res.json(article)
             })
             .catch(err => res.status(500).send(err))
     }
