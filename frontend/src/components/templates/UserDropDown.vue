@@ -16,8 +16,9 @@
       </template>
       <v-list>
         <v-list-item
+          v-if="user.admin"
         >
-          <v-list-item-title>Administração</v-list-item-title>
+          <v-list-item-title> <router-link to="/admin">Administração</router-link></v-list-item-title>
         </v-list-item>
         <v-list-item
           @click.prevent="logout"

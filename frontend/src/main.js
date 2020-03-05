@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import store from './config/store'
 import router from './config/router'
+import './config/axiosIntercept'
 
 Vue.config.productionTip = false
 
