@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '@/components/home/Home'
-import AdminPages from '@/components/admin/AdminPages'
-import Auth from '@/components/auth/Auth'
+const Home = () => import('@/components/home/Home')
+const AdminPages = () => import('@/components/admin/AdminPages')
+const Auth = () => import('@/components/auth/Auth')
+const ArticleByCategory = () => import('@/components/article/ArticleByCategory')
+const ArticleById = () => import('@/components/article/ArticleById')
 import { userKey } from '@/global'
 
 Vue.use(VueRouter)
@@ -24,6 +26,16 @@ const routes = [
     name: 'auth',
     path: '/auth',
     component: Auth
+  },
+  {
+    name: 'articlesByCategory',
+    path: '/categories/:id/articles',
+    component: ArticleByCategory
+  },
+  {
+    name: 'articlesById',
+    path: '/articles/:id',
+    component: ArticleById
   }
 ]
 
